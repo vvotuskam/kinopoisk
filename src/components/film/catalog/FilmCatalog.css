@@ -1,0 +1,38 @@
+div {
+    color: white;
+}
+
+.catalog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 100px 30px;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* CustomPagination.css */
+
+.custom-pagination .page-link {
+    /*color: #ffd500;*/
+    background-color: #282c34;
+    border-color: white;
+}
+
+.custom-pagination .page-link:hover {
+    color: #fff;
+    /*background-color: #ffd500;*/
+    /*border-color: #ffd500;*/
+}
+
+.custom-pagination .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    /*background-color: #ffd500;*/
+    /*border-color: #ffd500;*/
+}

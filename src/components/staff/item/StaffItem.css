@@ -1,0 +1,12 @@
+.staff-item {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.staff-image {
+    width: 500px;
+    height: auto;
+    object-fit: cover;
+}
