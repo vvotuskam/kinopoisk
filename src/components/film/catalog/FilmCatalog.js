@@ -1,93 +1,85 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import FilmService from "../../../service/FilmService";
-import {Col, Container, Form, Pagination, Row} from "react-bootstrap";
-import axios from "axios";
+import { Col, Row } from "react-bootstrap";
 import FilmItem from "../item/FilmItem";
 import './FilmCatalog.css'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import FilmPagination from "../other/FilmPagination";
 import FilmSelect from "../other/FilmSelect";
 
-const FilmCatalog = () => {
-    const [films, setFilms] = useState([]);
-    const [total, setTotal] = useState();
-    const [totalPages, setTotalPages] = useState(-1);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [order, setOrder] = useState('')
+class FilmCatalog extends Component {
+    constructor(props) {
+        super(props);
 
-    const getFilms = async () => {
+        this.state = {
+            films: [],
+            totalPages: -1,
+            currentPage: 1,
+            order: ''
+        };
+    }
+
+    componentDidMount() {
+        this.getFilms();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const { currentPage, order } = this.state;
+
+        if (currentPage !== prevState.currentPage || order !== prevState.order) {
+            this.getFilms();
+        }
+    }
+
+    getFilms = async () => {
         try {
+            const { currentPage, order } = this.state;
             const data = await FilmService.fetchAllFilms(currentPage, order);
-            setFilms(data.items);
-            setTotal(data.total);
-            setTotalPages(data.totalPages);
+            this.setState({
+                films: data.items,
+                totalPages: data.totalPages
+            });
         } catch (e) {
             console.error(e);
         }
     }
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-        window.scrollTo(0, 0)
+    handlePageChange = (page) => {
+        this.setState({ currentPage: page });
+        window.scrollTo(0, 0);
     }
 
-    const handleSelect = (e) => {
-        setOrder(e.target.value)
+    handleSelect = (e) => {
+        this.setState({ order: e.target.value });
     }
 
-    useEffect(() => {
-        getFilms();
-    }, [currentPage, order]);
+    render() {
+        const { films, totalPages, currentPage } = this.state;
 
-    // const renderPagination = () => {
-    //     if (totalPages === -1) return null;
-    //
-    //     const paginationItems = [];
-    //     for (let i = 1; i <= totalPages; i++) {
-    //         paginationItems.push(
-    //             <Pagination.Item
-    //                 key={i}
-    //                 active={i === currentPage}
-    //                 onClick={() => handlePageChange(i)}
-    //             >
-    //                 {i}
-    //             </Pagination.Item>
-    //         );
-    //     }
-    //
-    //     return (
-    //         <Pagination className="custom-pagination">
-    //             {paginationItems}
-    //         </Pagination>
-    //     );
-    // }
-
-    return (
-        <div className='catalog'>
-            <div style={{width: '100%', margin: 10}}>
-                <Row style={{float: "right"}}>
-                    <Col className='d-flex align-items-center'>
-                        <FilmSelect handleSelect={handleSelect}/>
-                    </Col>
-                </Row>
+        return (
+            <div className='catalog'>
+                <div style={{ width: '100%', margin: 10 }}>
+                    <Row style={{ float: "right" }}>
+                        <Col className='d-flex align-items-center'>
+                            <FilmSelect handleSelect={this.handleSelect} />
+                        </Col>
+                    </Row>
+                </div>
+                <div className='items'>
+                    {
+                        films
+                            .filter(film => film.nameRu !== 'BadComedian' && film.nameRu !== 'Лорды раздевалки')
+                            .map(film => (
+                                <Link to={`/${film.kinopoiskId}`} style={{ textDecoration: "none" }} key={film.kinopoiskId}>
+                                    <FilmItem key={film.kinopoiskId} film={film} />
+                                </Link>
+                            ))
+                    }
+                </div>
+                <FilmPagination totalPages={totalPages} currentPage={currentPage} handlePageChange={this.handlePageChange} />
             </div>
-            <div className='items'>
-                {
-                    films
-                        .filter(film => film.nameRu !== 'BadComedian')
-                        .map(film => (
-                            <Link to={`/${film.kinopoiskId}`} style={{textDecoration: "none"}}>
-                                <FilmItem key={film.kinopoiskId} film={film}/>
-                            </Link>
-                        ))
-                }
-            </div>
-            {/*{*/}
-            {/*    renderPagination()*/}
-            {/*}*/}
-            <FilmPagination totalPages={totalPages} currentPage={currentPage} handlePageChange={handlePageChange}/>
-        </div>
-    );
-};
+        );
+    }
+}
 
 export default FilmCatalog;

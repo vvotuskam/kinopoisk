@@ -30,8 +30,8 @@ const StaffInfo = () => {
 
     const getProfessions = () => {
         const array = profession.split(', ')
-        return array.map(i => (
-            <Badge style={{marginRight: 5}}>
+        return array.map((i, index) => (
+            <Badge style={{marginRight: 5}} key={index}>
                 {i}
             </Badge>
         ))

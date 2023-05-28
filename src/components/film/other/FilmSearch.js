@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {Link, useParams} from "react-router-dom";import FilmService from "../../service/FilmService";
-import FilmItem from "./item/FilmItem";
-import FilmPagination from "./other/FilmPagination";
+import {Link, useParams} from "react-router-dom";import FilmService from "../../../service/FilmService";
+import FilmItem from "../item/FilmItem";
+import FilmPagination from "./FilmPagination";
 
 const FilmSearch = () => {
 

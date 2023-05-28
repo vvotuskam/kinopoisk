@@ -5,10 +5,10 @@ const FilmSelect = ({handleSelect}) => {
     return (
         <>
             <div style={{marginRight: 15}}>Order</div>
-            <Form.Select onChange={handleSelect}>
-                <option value={'RATING'} selected>Rating</option>
-                <option value={'NUM_VOTE'}>Number of votes</option>
-                <option value={'YEAR'}>Year</option>
+            <Form.Select onChange={handleSelect} defaultValue={'RATING'}>
+                <option value={'RATING'} key={'RATING'}>Rating</option>
+                <option value={'NUM_VOTE'} key={'NUM_VOTE'}>Number of votes</option>
+                <option value={'YEAR'} key={'YEAR'}>Year</option>
             </Form.Select>
         </>
     );

@@ -78,15 +78,15 @@ const FilmInfo = () => {
                     <p className="film-original-name" key={1}>Original Name: {film.nameOriginal}</p>
                     <p className="film-year" key={2}>Year: {film.year}</p>
                     <p className="film-countries" key={3}>
-                        Countries: {film.countries.map((country) => (
-                        <Badge variant="secondary" className="mr-1">
+                        Countries: {film.countries.map((country, index) => (
+                        <Badge variant="secondary" className="mr-1" key={index}>
                             {country.country}
                         </Badge>
                     ))}
                     </p>
                     <p className="film-genres" key={4}>
-                        Genres: {film.genres.map((genre) => (
-                        <Badge variant="secondary" className="mr-1">
+                        Genres: {film.genres.map((genre, index) => (
+                        <Badge variant="secondary" className="mr-1" key={index}>
                             {genre.genre}
                         </Badge>
                     ))}

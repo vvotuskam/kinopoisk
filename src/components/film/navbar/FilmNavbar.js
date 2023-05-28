@@ -24,15 +24,9 @@ const FilmNavbar = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link>
-                        <Link to={'/'} style={{textDecoration: "none", color: "white"}}>Home</Link>
-                    </Nav.Link>
-                    <Nav.Link>
-                        <Link to={'/favourites'} style={{textDecoration: "none", color: "white"}}>Favourites</Link>
-                    </Nav.Link>
-                    <Nav.Link>
-                        <Link to={'/about'} style={{textDecoration: "none", color: "white"}}>About</Link>
-                    </Nav.Link>
+                    <Link to={'/'} style={{textDecoration: "none", color: "white", marginRight: 10}}>Home</Link>
+                    <Link to={'/favourites'} style={{textDecoration: "none", color: "white", marginRight: 10}}>Favourites</Link>
+                    <Link to={'/about'} style={{textDecoration: "none", color: "white"}}>About</Link>
                 </Nav>
                 <Form className="d-flex" onSubmit={handleSearch}>
                     <Form.Control

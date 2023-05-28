@@ -8,7 +8,7 @@ import About from "./components/about/About";
 import FilmFavourite from "./components/film/favourite/FilmFavourite";
 import StaffCarousel from "./components/staff/carousel/StaffCarousel";
 import StaffInfo from "./components/staff/info/StaffInfo";
-import FilmSearch from "./components/film/FilmSearch";
+import FilmSearch from "./components/film/other/FilmSearch";
 
 const App = () => {
 

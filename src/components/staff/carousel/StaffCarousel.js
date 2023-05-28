@@ -29,8 +29,8 @@ const StaffCarousel = ({filmId}) => {
         <Carousel>
             {
                 staff.map(s => (
-                    <Carousel.Item>
-                        <Link to={`/staff/${s.staffId}`} style={{textDecoration: "none"}}>
+                    <Carousel.Item key={s.staffId}>
+                        <Link to={`/staff/${s.staffId}`} style={{textDecoration: "none"}} key={s.staffId}>
                             <StaffItem staff={s} key={s.staffId}/>
                         </Link>
                     </Carousel.Item>

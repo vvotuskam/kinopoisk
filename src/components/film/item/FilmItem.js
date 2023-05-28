@@ -25,9 +25,11 @@ const FilmItem = ({ film }) => {
                 <h3>{getTitle()}</h3>
                 <p className="mb-1">Original Name: {film.nameOriginal}</p>
                 <p className="mb-1">Country: {film.countries[0]?.country}</p>
-                <p className="mb-1">Genres: {
-                    film.genres.map((genre) => <Badge bg="primary" className="mr-1" >{genre.genre}</Badge>)
-                }</p>
+                <p className="mb-1">
+                    Genres: {
+                        film.genres.map((genre, index) => <Badge bg="primary" className="mr-1" key={index} >{genre.genre}</Badge>)
+                    }
+                </p>
                 <p className="mb-1">Kinopoisk Rating: {film.ratingKinopoisk}</p>
                 <p className="mb-1">IMDb Rating: {film.ratingImdb}</p>
                 <p className="mb-0">Year: {film.year}</p>
